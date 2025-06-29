@@ -12,6 +12,7 @@ import { zodTextFormat } from "openai/helpers/zod";
 
 import OpenAI from "openai";
 import { Job } from "../../models/job.model";
+import { JobsService } from "../../data/jobs.service";
 
 @Component({
   selector: "app-create-job",
@@ -25,6 +26,7 @@ import { Job } from "../../models/job.model";
 })
 export class CreateJobComponent {
   private fb = inject(FormBuilder);
+  private jobsService: JobsService = inject(JobsService);
   jobForm = this.fb.group({
     apiKey: [null, Validators.required],
     description: [null, Validators.required],
@@ -77,5 +79,7 @@ export class CreateJobComponent {
     const jobData: Job = JobDescription.parse(JSON.parse(response.output_text));
 
     console.log("JOB DATA" + JSON.stringify(jobData));
+
+    this.jobsService.data = this.jobsService.data.concat(jobData);
   }
 }
