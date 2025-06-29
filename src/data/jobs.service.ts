@@ -3,6 +3,7 @@ import { Job } from "../models/job.model";
 
 @Injectable({ providedIn: "root" })
 export class JobsService {
+    lastId = "5";
     data: Job[] = [
         {
             "id": "1",
@@ -103,4 +104,13 @@ export class JobsService {
             "datePosted": new Date("2025-06-18T00:00:00Z"),
         },
     ];
+
+    addJob(job: Job) {
+        let lastIdNum = parseInt(this.lastId);
+        lastIdNum++;
+        job.id = lastIdNum.toString();
+
+        this.data = this.data.concat(job);
+        this.lastId = job.id;
+    }
 }

@@ -21,7 +21,7 @@ export class JobListComponent implements AfterViewInit {
   dataSource = new JobListDataSource();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ["id", "title", "payRange"];
+  displayedColumns = ["id", "title", "company", "location", "payRange"];
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

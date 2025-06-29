@@ -37,7 +37,6 @@ export class CreateJobComponent {
       apiKey: this.jobForm.value.apiKey!,
       dangerouslyAllowBrowser: true,
     });
-    console.log("DESCRIPTION: " + this.jobForm.value.description);
 
     const JobDescription = z.object({
       id: z.string(),
@@ -73,13 +72,11 @@ export class CreateJobComponent {
         ),
       },
     });
-    console.log(response);
-    alert("Thanks!");
 
     const jobData: Job = JobDescription.parse(JSON.parse(response.output_text));
 
-    console.log("JOB DATA" + JSON.stringify(jobData));
+    this.jobsService.addJob(jobData);
 
-    this.jobsService.data = this.jobsService.data.concat(jobData);
+    alert("Job Added");
   }
 }
